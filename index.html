@@ -3,36 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendar Reunión — Juan Betancur</title>
+  <title>Meeting Scheduler - Juan Betancur</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <div class="container">
-
-    <!-- Header -->
     <header class="header">
+      <div class="top-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+            </svg>
+          </span>
+          <span id="themeToggleText">Modo oscuro</span>
+        </button>
+        <div class="lang-toggle" role="group" aria-label="Language selector">
+          <button class="lang-btn is-active" type="button" data-lang="es">ES</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+
       <div class="avatar">DNA</div>
-      <h1>Pasantía</h1>
-      <p>Seleccione un espacio para agendar una reunión en Google Calendar.</p>
+      <h1 id="pageTitle">Pasantia</h1>
+      <p id="pageSubtitle">Seleccione un espacio para agendar una reunion en Google Calendar.</p>
+
       <span class="tz-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Hora de Colombia — GMT-5
+        <span id="tzText">Hora de Colombia - GMT-5</span>
       </span>
     </header>
 
-    <!-- Instruction — tells user what to do -->
     <div class="instruction">
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M22 22l-5-5"/></svg>
-        Haz clic para agendar
+        <span id="instructionText">Haz clic para agendar</span>
       </span>
     </div>
 
-    <!-- Week Navigation -->
     <nav class="week-nav">
       <button id="prevWeek" aria-label="Semana anterior">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -43,40 +54,28 @@
       </button>
     </nav>
 
-    <!-- Schedule Table -->
     <div class="table-wrap">
       <div class="table-scroll">
-        <table class="schedule" id="grid">
-          <!-- Built by app.js -->
-        </table>
+        <table class="schedule" id="grid"></table>
       </div>
     </div>
 
-    <!-- Legend -->
     <div class="legend">
-      <span><i class="g"></i> Disponible</span>
-      <span><i class="u"></i> No disponible</span>
+      <span><i class="g"></i><span id="legendAvailText">Disponible</span></span>
+      <span><i class="u"></i><span id="legendUnavailText">No disponible</span></span>
     </div>
 
-    <!-- Disclaimer -->
-    <p class="note">
-      <strong>Nota:</strong> El encuentro se confirmará por correo electrónico.
-    </p>
+    <p class="note" id="noteText"><strong>Nota:</strong> El encuentro se confirmara por correo electronico.</p>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       MODAL — Confirmation step (no user email)
-       ═══════════════════════════════════════════ -->
   <div class="overlay" id="overlay">
     <div class="modal">
       <button class="modal-close" id="modalClose" aria-label="Cerrar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      <h2>Confirmar reunión</h2>
-      <p class="modal-desc">
-        Se abrirá Google Calendar con el evento listo. Solo haz clic en <strong>"Guardar"</strong> para enviar la invitación a Juan Betancur.
-      </p>
+      <h2 id="modalTitle">Confirmar reunion</h2>
+      <p class="modal-desc" id="modalDesc">Se abrira Google Calendar con el evento listo. Solo haz clic en <strong>"Guardar"</strong> para enviar la invitacion a Juan Betancur.</p>
 
       <div class="slot-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -84,14 +83,14 @@
       </div>
 
       <div class="field">
-        <label for="gSubject">Asunto de la reunión (opcional)</label>
-        <input type="text" id="gSubject" placeholder="Ej: Consulta sobre proyecto, Revisión de propuesta…">
+        <label for="gSubject" id="subjectLabel">Asunto de la reunion (opcional)</label>
+        <input type="text" id="gSubject" placeholder="Ej: Consulta sobre proyecto, Revision de propuesta...">
       </div>
 
       <div class="modal-actions">
         <a class="btn btn-primary" id="btnGcal" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Confirmar y agendar
+          <span id="btnGcalText">Confirmar y agendar</span>
         </a>
         <button class="btn-cancel" id="btnCancel">Cancelar</button>
       </div>
