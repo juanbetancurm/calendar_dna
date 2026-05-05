@@ -21,7 +21,7 @@ const I18N = {
   es: {
     htmlLang: 'es',
     documentTitle: 'Agendar reunion - Juan Betancur',
-    pageTitle: 'Desarrollo de Aplicaciones',
+    pageTitle: 'Desarrollo de Aplicación',
     pageSubtitle: 'Seleccione un espacio para agendar una reunion en Google Calendar.',
     tzText: 'Hora de Colombia - GMT-5',
     instructionText: 'Haz clic para agendar',
