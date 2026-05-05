@@ -21,7 +21,7 @@ const I18N = {
   es: {
     htmlLang: 'es',
     documentTitle: 'Agendar reunion - Juan Betancur',
-    pageTitle: 'Pasantia',
+    pageTitle: 'Desarrollo de Aplicaciones',
     pageSubtitle: 'Seleccione un espacio para agendar una reunion en Google Calendar.',
     tzText: 'Hora de Colombia - GMT-5',
     instructionText: 'Haz clic para agendar',
@@ -63,7 +63,7 @@ const I18N = {
   en: {
     htmlLang: 'en',
     documentTitle: 'Schedule meeting - Juan Betancur',
-    pageTitle: 'Internship',
+    pageTitle: 'Pipeline Development',
     pageSubtitle: 'Select a slot to schedule a meeting in Google Calendar.',
     tzText: 'Colombia time - GMT-5',
     instructionText: 'Click to schedule',
